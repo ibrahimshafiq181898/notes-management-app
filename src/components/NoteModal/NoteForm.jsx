@@ -11,7 +11,11 @@ const NoteForm = ({ formData, onChange, onSubmit }) => {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.type) {
+    if (
+      formData.type === undefined ||
+      formData.type === null ||
+      formData.type === ""
+    ) {
       newErrors.type = "Please select a note type";
     }
     if (!formData.title) {
@@ -44,7 +48,6 @@ const NoteForm = ({ formData, onChange, onSubmit }) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     onChange({ ...formData, [name]: value });
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors({ ...errors, [name]: "" });
     }
