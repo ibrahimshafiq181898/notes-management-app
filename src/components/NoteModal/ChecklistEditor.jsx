@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const ChecklistEditor = ({ checkboxes, onCheckboxesChange }) => {
-  const [newOption, setNewOption] = useState('');
+  const [newOption, setNewOption] = useState("");
 
   const handleAddOption = () => {
     if (newOption.trim()) {
@@ -9,7 +9,7 @@ const ChecklistEditor = ({ checkboxes, onCheckboxesChange }) => {
         ...checkboxes,
         { text: newOption.trim(), checked: false }
       ]);
-      setNewOption('');
+      setNewOption("");
     }
   };
 
@@ -30,11 +30,22 @@ const ChecklistEditor = ({ checkboxes, onCheckboxesChange }) => {
     onCheckboxesChange(newCheckboxes);
   };
 
+  const placeholderStyles = `
+    [&::placeholder]:text-[#070707]
+    [&::placeholder]:font-inter
+    [&::placeholder]:font-bold
+    [&::placeholder]:text-sm
+    [&::placeholder]:leading-[140%]
+  `;
+
   return (
     <div className="space-y-4">
       <h3 className="font-semibold text-lg">Add option</h3>
       {checkboxes.map((checkbox, index) => (
-        <div key={index} className="flex items-center gap-3 px-4 py-3 bg-[#f4f44f4] rounded-[10px]">
+        <div
+          key={index}
+          className="flex items-center gap-3 px-4 py-3 bg-[#f4f4f4] rounded-[10px]"
+        >
           <input
             type="checkbox"
             checked={checkbox.checked}
@@ -46,15 +57,25 @@ const ChecklistEditor = ({ checkboxes, onCheckboxesChange }) => {
             value={checkbox.text}
             onChange={(e) => handleTextChange(index, e.target.value)}
             placeholder="Add your task here..."
-            className="flex-1 px-4 py-2 bg-transparent border-none focus:outline-none focus:ring-0 placeholder-gray-400"
+            className={`flex-1 h-[56px] px-4 bg-transparent border-none focus:outline-none focus:ring-0 ${placeholderStyles}`}
           />
           <button
             type="button"
             onClick={() => handleDelete(index)}
             className="p-1.5 text-gray-400 hover:text-red-500 rounded-full hover:bg-gray-100"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           </button>
         </div>
@@ -65,7 +86,7 @@ const ChecklistEditor = ({ checkboxes, onCheckboxesChange }) => {
           value={newOption}
           onChange={(e) => setNewOption(e.target.value)}
           placeholder="Add your task here..."
-          className="flex-1 px-4 py-3 h-[48px] rounded-2xl bg-[#f4f4f4] placeholder-gray-400 outline-none"
+          className={`flex-1 h-[56px] px-4 bg-[#f4f4f4] rounded-2xl outline-none ${placeholderStyles}`}
         />
         <button
           type="button"
@@ -79,4 +100,4 @@ const ChecklistEditor = ({ checkboxes, onCheckboxesChange }) => {
   );
 };
 
-export default ChecklistEditor; 
+export default ChecklistEditor;
