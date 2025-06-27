@@ -15,6 +15,11 @@ const TypeSelector = ({ selectedType, onTypeSelect }) => {
     setIsDropdownOpen(false);
   };
 
+  const getSelectedTypeLabel = () => {
+    const selectedCard = cardTypes.find((type) => type.id === selectedType);
+    return selectedCard ? selectedCard.label : "Select type of card";
+  };
+
   const placeholderStyles = `
     font-inter
     font-bold
@@ -32,12 +37,12 @@ const TypeSelector = ({ selectedType, onTypeSelect }) => {
       >
         <span
           className={
-            selectedType === "" ? `${placeholderStyles}` : "text-black"
+            selectedType === ""
+              ? `${placeholderStyles}`
+              : "text-black  font-semibold"
           }
         >
-          {selectedType === ""
-            ? "Select type of card"
-            : cardTypes[selectedType].label}
+          {getSelectedTypeLabel()}
         </span>
         <svg
           className={`w-5 h-5 transition-transform ${
