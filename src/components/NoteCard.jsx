@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { deleteNote } from "../redux/notesSlice";
+import { deleteNote } from "../redux/notes";
 import editIcon from "../assets/editicon.svg";
 import showIcon from "../assets/showicon.svg";
 import TextNote from "./NoteTypes/TextNote";
@@ -13,6 +13,7 @@ const NoteCard = ({ note }) => {
 
   const handleEdit = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     navigate(`/note/${note.id}/edit`);
   };
 
