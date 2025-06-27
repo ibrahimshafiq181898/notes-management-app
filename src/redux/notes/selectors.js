@@ -9,11 +9,11 @@ export const selectAllNotes = createSelector(
 );
 
 export const selectFilteredNotes = createSelector(
-  [selectAllNotes, state => state.notes.filter],
+  [selectAllNotes, (state) => state.notes.filter],
   (notes, filter) => {
-    if (filter === 'all') return notes;
+    if (filter === "all") return notes;
     const typeValue = TYPE_MAP[filter];
-    return notes.filter(note => note.type !== typeValue);
+    return notes.filter((note) => note.type === typeValue);
   }
 );
 

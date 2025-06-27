@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import {
   fetchNotes,
   selectFilteredNotes,
@@ -8,12 +7,16 @@ import {
 } from "../redux/notes";
 import Header from "../components/Header";
 import NoteCard from "../components/NoteCard";
-import FilterDropdown from "../components/FilterDropDown";
 import Pagination from "../components/Pagination";
 import Loader from "../components/Loader";
 import ErrorMessage from "../components/ErrorMessage";
+import NoteModal from "../components/NoteModal";
+import FilterDropdown from "../components/FilterDropDown";
+import { useNoteContext } from "../context/NoteContext";
+
 const HomePage = () => {
   const dispatch = useDispatch();
+  const { isModalOpen, setIsModalOpen } = useNoteContext();
   const status = useSelector((state) => state.notes.status);
   const error = useSelector((state) => state.notes.error);
   const filteredNotes = useSelector(selectFilteredNotes);
@@ -44,7 +47,10 @@ const HomePage = () => {
           </div>
           <div className="flex items-center space-x-4">
             <FilterDropdown />
-            <button className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-[36px] shadow-sm text-white bg-[#007AFF] hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-[36px] shadow-sm text-white bg-[#007AFF] hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            >
               <svg
                 className="w-5 h-5 mr-1.5"
                 fill="none"
@@ -75,6 +81,8 @@ const HomePage = () => {
           )}
         </div>
       </main>
+
+      <NoteModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };
