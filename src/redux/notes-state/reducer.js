@@ -27,9 +27,11 @@ const notesSlice = createSlice({
       };
       state.items.unshift(newNote);
     },
+
     deleteNote: (state, action) => {
       state.items = state.items.filter((note) => note.id !== action.payload);
     },
+
     updateNote: (state, action) => {
       const index = state.items.findIndex(
         (note) => note.id === action.payload.id
@@ -45,6 +47,7 @@ const notesSlice = createSlice({
         };
       }
     },
+
     toggleCheckbox: (state, action) => {
       const { noteId, checkboxIndex } = action.payload;
       const note = state.items.find((note) => note.id === noteId);
@@ -53,12 +56,15 @@ const notesSlice = createSlice({
           !note.checkboxes[checkboxIndex].checked;
       }
     },
+
     setFilter: (state, action) => {
       state.filter = action.payload;
     },
+
     setCurrentPage: (state, action) => {
       state.currentPage = action.payload;
     },
+
     setItemsPerPage: (state, action) => {
       state.itemsPerPage = action.payload;
     }
