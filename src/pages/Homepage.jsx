@@ -3,9 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchNotes,
   selectFilteredNotes,
-  selectPaginatedNotes,
-  TYPE_MAP,
-  NOTE_TYPES
+  selectPaginatedNotes
 } from "../redux/notes";
 import Header from "../components/Header";
 import NoteCard from "../components/NoteCard";
@@ -23,7 +21,6 @@ const HomePage = () => {
   const error = useSelector((state) => state.notes.error);
   const filteredNotes = useSelector(selectFilteredNotes);
   const paginatedNotes = useSelector(selectPaginatedNotes);
-  const currentFilter = useSelector((state) => state.notes.filter);
 
   useEffect(() => {
     if (status === "idle") {
@@ -38,13 +35,6 @@ const HomePage = () => {
   if (status === "failed") {
     return <ErrorMessage message={error} />;
   }
-
-  const getInitialNoteType = () => {
-    if (currentFilter === "all") {
-      return NOTE_TYPES.TEXT;
-    }
-    return TYPE_MAP[currentFilter];
-  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -92,11 +82,7 @@ const HomePage = () => {
         </div>
       </main>
 
-      <NoteModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        initialType={getInitialNoteType()}
-      />
+      <NoteModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };

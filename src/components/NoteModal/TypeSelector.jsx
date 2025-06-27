@@ -16,6 +16,13 @@ const TypeSelector = ({ selectedType, onTypeSelect }) => {
   };
 
   const getSelectedTypeLabel = () => {
+    if (
+      selectedType === undefined ||
+      selectedType === null ||
+      selectedType === ""
+    ) {
+      return "Select type of card";
+    }
     const selectedCard = cardTypes.find((type) => type.id === selectedType);
     return selectedCard ? selectedCard.label : "Select type of card";
   };
@@ -28,6 +35,9 @@ const TypeSelector = ({ selectedType, onTypeSelect }) => {
     text-[#070707]
   `;
 
+  const isTypeSelected =
+    selectedType !== undefined && selectedType !== null && selectedType !== "";
+
   return (
     <div className="relative">
       <button
@@ -37,9 +47,9 @@ const TypeSelector = ({ selectedType, onTypeSelect }) => {
       >
         <span
           className={
-            selectedType === ""
-              ? `${placeholderStyles}`
-              : "text-black  font-semibold"
+            isTypeSelected
+              ? "text-black font-semibold"
+              : `${placeholderStyles} text-black font-bold`
           }
         >
           {getSelectedTypeLabel()}

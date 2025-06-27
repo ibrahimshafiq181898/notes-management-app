@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addNote, NOTE_TYPES } from "../../redux/notes";
+import { addNote } from "../../redux/notes";
 import NoteForm from "./NoteForm";
 
 const NoteModal = ({ isOpen, onClose, initialType = "" }) => {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    type: initialType !== "" ? Number(initialType) : undefined,
+    type: "",
     title: "",
     body: "",
     image: "",
@@ -16,14 +16,14 @@ const NoteModal = ({ isOpen, onClose, initialType = "" }) => {
   useEffect(() => {
     if (!isOpen) {
       setFormData({
-        type: initialType !== "" ? Number(initialType) : undefined,
+        type: "",
         title: "",
         body: "",
         image: "",
         checkboxes: []
       });
     }
-  }, [isOpen, initialType]);
+  }, [isOpen]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
