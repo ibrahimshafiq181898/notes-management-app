@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setFilter } from "../redux/notes";
-import threelines from "../assets/threelines.svg";
 
 const FilterDropdown = () => {
   const dispatch = useDispatch();
@@ -77,7 +76,20 @@ const FilterDropdown = () => {
                   className="appearance-none w-[18px] h-[18px] border-2 border-[#3D4D5A] rounded-[4px] checked:bg-[#2F80ED] checked:border-[#2F80ED] focus:ring-0 focus:ring-offset-0 cursor-pointer"
                 />
                 {currentFilter === option.value && (
-                  <img src={threelines} alt="" />
+                  <svg
+                    className="absolute left-[3px] top-[3px] w-[12px] h-[12px] text-white pointer-events-none"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M11.6666 3.5L5.24992 9.91667L2.33325 7"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
                 )}
               </div>
               <span className="ml-3 font-geist font-normal text-[14px] leading-[18px] text-[#0A0C11]">
