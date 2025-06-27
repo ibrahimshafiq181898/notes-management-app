@@ -1,17 +1,17 @@
-  import { useState, useRef } from 'react';
-import imgUploaderIcon from '../assets/imgpreview.svg';
+import { useState, useRef } from "react";
+import imgUploaderIcon from "../assets/imgpreview.svg";
 
 const ImageUploader = ({ onImageSelect, currentImage }) => {
   const [isDragging, setIsDragging] = useState(false);
-  const [preview, setPreview] = useState(currentImage || '');
+  const [preview, setPreview] = useState(currentImage || "");
   const fileInputRef = useRef(null);
 
   const handleDrag = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (e.type === 'dragenter' || e.type === 'dragover') {
+    if (e.type === "dragenter" || e.type === "dragover") {
       setIsDragging(true);
-    } else if (e.type === 'dragleave') {
+    } else if (e.type === "dragleave") {
       setIsDragging(false);
     }
   };
@@ -28,7 +28,7 @@ const ImageUploader = ({ onImageSelect, currentImage }) => {
   };
 
   const handleFile = (file) => {
-    if (file && file.type.startsWith('image/')) {
+    if (file && file.type.startsWith("image/")) {
       const reader = new FileReader();
       reader.onload = (e) => {
         const imageUrl = e.target.result;
@@ -52,14 +52,14 @@ const ImageUploader = ({ onImageSelect, currentImage }) => {
 
   const handleRemoveImage = (e) => {
     e.stopPropagation();
-    setPreview('');
-    onImageSelect('');
+    setPreview("");
+    onImageSelect("");
   };
 
   return (
     <div
-      className={`relative flex flex-col items-center justify-center w-full min-h-[200px] border-2 border-dashed border-[#007AFF] rounded-[10px] cursor-pointer ${
-        isDragging ? 'bg-blue-50' : 'bg-transparent'
+      className={`relative flex flex-col items-center justify-center w-full min-h-[200px]  rounded-[10px] cursor-pointer ${
+        isDragging ? "bg-blue-50" : "bg-transparent"
       }`}
       onDragEnter={handleDrag}
       onDragLeave={handleDrag}
@@ -79,8 +79,19 @@ const ImageUploader = ({ onImageSelect, currentImage }) => {
               onClick={handleRemoveImage}
               className="absolute top-2 right-2 p-1.5 bg-white rounded-full shadow-md hover:bg-gray-100"
             >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
@@ -112,4 +123,4 @@ const ImageUploader = ({ onImageSelect, currentImage }) => {
   );
 };
 
-export default ImageUploader; 
+export default ImageUploader;
