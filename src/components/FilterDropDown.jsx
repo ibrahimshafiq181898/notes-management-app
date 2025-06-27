@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setFilter } from "../redux/notes";
+import threelines from "../assets/threelines.svg";
 
 const FilterDropdown = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,6 @@ const FilterDropdown = () => {
 
   const handleSelect = (value) => {
     dispatch(setFilter(value));
-    setIsOpen(false);
   };
 
   return (
@@ -59,25 +59,32 @@ const FilterDropdown = () => {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
-          <div className="py-1">
-            {filterOptions.map((option) => (
-              <label
-                key={option.value}
-                className="flex items-center px-4 py-2 cursor-pointer hover:bg-gray-50"
-              >
+        <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 z-50 py-2">
+          {filterOptions.map((option) => (
+            <label
+              key={option.value}
+              className={`flex items-center px-4 py-2 cursor-pointer ${
+                currentFilter === option.value
+                  ? "bg-[#EEF6FF]"
+                  : "hover:bg-gray-50"
+              }`}
+            >
+              <div className="relative flex items-center">
                 <input
                   type="checkbox"
                   checked={currentFilter === option.value}
                   onChange={() => handleSelect(option.value)}
-                  className="w-4 h-4 text-blue-500 border-gray-300 rounded focus:ring-0 focus:ring-offset-0"
+                  className="appearance-none w-[18px] h-[18px] border-2 border-[#3D4D5A] rounded-[4px] checked:bg-[#2F80ED] checked:border-[#2F80ED] focus:ring-0 focus:ring-offset-0 cursor-pointer"
                 />
-                <span className="ml-3 text-sm text-gray-700">
-                  {option.label}
-                </span>
-              </label>
-            ))}
-          </div>
+                {currentFilter === option.value && (
+                  <img src={threelines} alt="" />
+                )}
+              </div>
+              <span className="ml-3 font-geist font-normal text-[14px] leading-[18px] text-[#0A0C11]">
+                {option.label}
+              </span>
+            </label>
+          ))}
         </div>
       )}
     </div>
