@@ -6,6 +6,7 @@ import showIcon from "../assets/showicon.svg";
 import TextNote from "./NoteTypes/TextNote";
 import ImageNote from "./NoteTypes/ImageNote";
 import CheckboxNote from "./NoteTypes/CheckboxNote";
+import { NOTE_TYPES } from "../redux/notes";
 
 const NoteCard = ({ note }) => {
   const dispatch = useDispatch();
@@ -34,12 +35,11 @@ const NoteCard = ({ note }) => {
 
   const renderContent = () => {
     switch (note.type) {
-      case 1:
+      case NOTE_TYPES.IMAGE:
         return <ImageNote note={note} />;
-      case 2:
+      case NOTE_TYPES.CHECKLIST:
         return <CheckboxNote note={note} />;
-      case 3:
-        return <TextNote note={note} />;
+      case NOTE_TYPES.TEXT:
       default:
         return <TextNote note={note} />;
     }
